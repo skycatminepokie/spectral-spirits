@@ -5,13 +5,13 @@
 	"name": "Spectral Spirits",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"Me!"
+		"skycatminepokie"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/skycatminepokie/",
+		"sources": "https://github.com/skycatminepokie/spectral-spirits"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/spectral-spirits/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -37,8 +37,5 @@
 		"minecraft": "~1.21-",
 		"java": ">=21",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
