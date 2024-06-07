@@ -13,6 +13,13 @@ public class SpectralSpiritEntity extends PathAwareEntity implements Ownable {
 
     public SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world) {
         super(entityType, world);
+        setNoGravity(true);
+        noClip = true;
+    }
+
+    @Override
+    public boolean hasNoGravity() { // TODO later: Check if there's a better way to do this. Vexes just set it every tick.
+        return true;
     }
 
     @Nullable
