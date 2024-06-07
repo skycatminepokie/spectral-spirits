@@ -11,9 +11,8 @@ import org.jetbrains.annotations.Nullable;
 public class SpectralSpiritEntity extends PathAwareEntity implements Ownable {
     protected PlayerEntity owner;
 
-    protected SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world, PlayerEntity owner) {
+    public SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world) {
         super(entityType, world);
-        this.owner = owner;
     }
 
     @Nullable
