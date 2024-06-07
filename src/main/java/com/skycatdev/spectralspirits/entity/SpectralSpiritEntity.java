@@ -2,27 +2,23 @@ package com.skycatdev.spectralspirits.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.entity.Ownable;
+import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public class SpectralSpiritEntity extends Entity {
-    public SpectralSpiritEntity(EntityType<?> type, World world) {
-        super(type, world);
+public class SpectralSpiritEntity extends PathAwareEntity implements Ownable {
+    protected PlayerEntity owner;
+
+    protected SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world, PlayerEntity owner) {
+        super(entityType, world);
+        this.owner = owner;
     }
 
+    @Nullable
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-
-    }
-
-    @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
-
-    }
-
-    @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
-
+    public Entity getOwner() {
+        return owner;
     }
 }
