@@ -6,15 +6,17 @@ import net.minecraft.entity.Ownable;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class SpectralSpiritEntity extends PathAwareEntity implements Ownable {
+public class SpectralSpiritEntity extends MobEntity implements Ownable {
     protected PlayerEntity owner;
 
     public SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world) {
@@ -36,6 +38,7 @@ public class SpectralSpiritEntity extends PathAwareEntity implements Ownable {
     public boolean damage(DamageSource damageSource, float amount) {
         if (damageSource.getAttacker() instanceof ServerPlayerEntity player) {
             owner = player;
+            teleport(player.getX(), player.getY(), player.getZ() + 0.5, false);
         }
         return super.damage(damageSource, amount);
     }
@@ -43,12 +46,6 @@ public class SpectralSpiritEntity extends PathAwareEntity implements Ownable {
     @Override
     public void tick() {
         super.tick();
-        this.setNoGravity(true); // TODO later: Check if there's a better way to do this. Vexes just set it every tick.
-    }
-
-    @Override
-    public boolean isOnGround() {
-        return true;
     }
 
     @Nullable
@@ -72,9 +69,20 @@ public class SpectralSpiritEntity extends PathAwareEntity implements Ownable {
         @Override
         public void tick() {
             Entity owner = this.owner.get();
-            if (squaredDistanceTo(owner) > 9) {
-                moveControl.moveTo(owner.getX(), owner.getY() + 1, owner.getZ(), 0.75);
-            }
+            double distance = squaredDistanceTo(owner);
+                // double distanceX = Math.abs(owner.getX() - getX());
+                // double distanceZ = Math.abs(owner.getZ() - getZ());
+                // double distance2d = Math.sqrt(distanceX * distanceZ);
+                // moveControl.moveTo(owner.getX(), owner.getY() + 1, owner.getZ(), 1 * distance2d);
+                double d = (owner.getX() - getX()) / 3f;
+                double e = (owner.getY() - getY() + 6) / 9f;
+                double g = (owner.getZ() - getZ()) / 3f;
+            double newX = Math.copySign(d * d * 0.4, d);
+            double newY = (Math.pow(e, 2) * 0.4) - getVelocity().getY();
+            double newZ = Math.copySign(g * g * 0.4, g);
+
+            setVelocity(getVelocity().add(newX, newY, newZ));
+
         }
     }
 
