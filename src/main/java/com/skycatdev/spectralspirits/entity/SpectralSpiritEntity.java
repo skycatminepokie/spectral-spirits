@@ -26,6 +26,7 @@ public class SpectralSpiritEntity extends MobEntity implements Ownable {
         noClip = true;
         owner = null;
         moveControl = new FlightMoveControl(this, 1, true);
+        intersectionChecked = false;
     }
 
     @Override
