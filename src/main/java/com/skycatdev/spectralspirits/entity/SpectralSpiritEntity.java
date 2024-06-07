@@ -10,6 +10,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -45,6 +46,7 @@ public class SpectralSpiritEntity extends MobEntity implements Ownable {
 
     @Override
     public void tick() {
+        setNoGravity(true);
         super.tick();
     }
 
@@ -69,17 +71,18 @@ public class SpectralSpiritEntity extends MobEntity implements Ownable {
         @Override
         public void tick() {
             Entity owner = this.owner.get();
-            double distance = squaredDistanceTo(owner);
-                // double distanceX = Math.abs(owner.getX() - getX());
-                // double distanceZ = Math.abs(owner.getZ() - getZ());
-                // double distance2d = Math.sqrt(distanceX * distanceZ);
-                // moveControl.moveTo(owner.getX(), owner.getY() + 1, owner.getZ(), 1 * distance2d);
-                double d = (owner.getX() - getX()) / 3f;
-                double e = (owner.getY() - getY() + 6) / 9f;
-                double g = (owner.getZ() - getZ()) / 3f;
+            // From Leashable#method_61161
+            double d = (owner.getX() - getX()) / 3f;
+            double e = (owner.getY() - getY()) / 15f;
+            double g = (owner.getZ() - getZ()) / 3f;
             double newX = Math.copySign(d * d * 0.4, d);
-            double newY = (Math.pow(e, 2) * 0.4) - getVelocity().getY();
+            double newY = Math.copySign(e * e * 0.4, e);
             double newZ = Math.copySign(g * g * 0.4, g);
+
+            // if at correct y level, cancel y
+            if (Math.abs(owner.getY() - getY()) < 0.2) {
+                newY = -getVelocity().getY();
+            }
 
             setVelocity(getVelocity().add(newX, newY, newZ));
 
