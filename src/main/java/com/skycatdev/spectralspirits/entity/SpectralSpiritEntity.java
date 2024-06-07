@@ -3,16 +3,12 @@ package com.skycatdev.spectralspirits.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Ownable;
-import net.minecraft.entity.ai.control.MoveControl;
+import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.mob.VexEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,9 +20,9 @@ public class SpectralSpiritEntity extends PathAwareEntity implements Ownable {
     public SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world) {
         super(entityType, world);
         // setNoGravity(true);
-        // noClip = true;
+        noClip = true;
         owner = null;
-        moveControl = new SpectralSpiritMoveControl(this);
+        moveControl = new FlightMoveControl(this, 1, true);
     }
 
     @Override
@@ -47,7 +43,12 @@ public class SpectralSpiritEntity extends PathAwareEntity implements Ownable {
     @Override
     public void tick() {
         super.tick();
-        //this.setNoGravity(true); // TODO later: Check if there's a better way to do this. Vexes just set it every tick.
+        this.setNoGravity(true); // TODO later: Check if there's a better way to do this. Vexes just set it every tick.
+    }
+
+    @Override
+    public boolean isOnGround() {
+        return true;
     }
 
     @Nullable
@@ -71,40 +72,10 @@ public class SpectralSpiritEntity extends PathAwareEntity implements Ownable {
         @Override
         public void tick() {
             Entity owner = this.owner.get();
-            if (squaredDistanceTo(owner) > 4) {
-                moveControl.moveTo(owner.getX(), owner.getY() + 1, owner.getZ(), 1);
+            if (squaredDistanceTo(owner) > 9) {
+                moveControl.moveTo(owner.getX(), owner.getY() + 1, owner.getZ(), 0.75);
             }
         }
     }
 
-    public class SpectralSpiritMoveControl extends MoveControl { // Heavily adapted from VexEntity
-        public SpectralSpiritMoveControl(MobEntity entity) {
-            super(entity);
-        }
-
-        @Override
-        public void tick() {
-            if (this.state != MoveControl.State.MOVE_TO) {
-                return;
-            }
-            Vec3d vec3d = new Vec3d(this.targetX - getX(), this.targetY - getY(), this.targetZ - getZ());
-            double d = vec3d.length();
-            if (d < getBoundingBox().getAverageSideLength()) {
-                this.state = MoveControl.State.WAIT;
-                setVelocity(getVelocity().multiply(0.5));
-            } else {
-                setVelocity(getVelocity().add(vec3d.multiply(this.speed * 0.05 / d)));
-                 if (getTarget() == null) {
-                     Vec3d vec3d2 = getVelocity();
-                     setYaw(-((float) MathHelper.atan2(vec3d2.x, vec3d2.z)) * 57.295776f);
-                     bodyYaw = getYaw();
-                 } else {
-                     double e = getTarget().getX() - getX();
-                     double f = getTarget().getZ() - getZ();
-                     setYaw(-((float)MathHelper.atan2(e, f)) * 57.295776f);
-                     bodyYaw = getYaw();
-                 }
-            }
-        }
-    }
 }
