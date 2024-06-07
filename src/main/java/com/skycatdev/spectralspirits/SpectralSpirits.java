@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -20,6 +21,6 @@ public class SpectralSpirits implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		FabricDefaultAttributeRegistry.register(SPECTRAL_SPIRIT, SpectralSpiritEntity.createMobAttributes());
+		FabricDefaultAttributeRegistry.register(SPECTRAL_SPIRIT, SpectralSpiritEntity.createMobAttributes().add(EntityAttributes.GENERIC_FLYING_SPEED, 1));
 	}
 }
