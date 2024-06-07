@@ -7,11 +7,9 @@ import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,20 +71,33 @@ public class SpectralSpiritEntity extends MobEntity implements Ownable {
         public void tick() {
             Entity owner = this.owner.get();
             // From Leashable#method_61161
-            double d = (owner.getX() - getX()) / 3f;
-            double e = (owner.getY() - getY()) / 15f;
-            double g = (owner.getZ() - getZ()) / 3f;
+            double targetX = owner.getX();
+            double targetY = owner.getEyeY();
+            double targetZ = owner.getZ();
+            double regYaw = owner.getBodyYaw() + 180;
+
+            targetX += Math.cos(Math.toRadians(regYaw));
+            targetZ += Math.sin(Math.toRadians(regYaw));
+            double d = (targetX - getX()) / 3f;
+            double e = (targetY - getY()) / 15f;
+            double g = (targetZ - getZ()) / 3f;
             double newX = Math.copySign(d * d * 0.4, d);
             double newY = Math.copySign(e * e * 0.4, e);
             double newZ = Math.copySign(g * g * 0.4, g);
+            // if yaw = 0 + 180, be on pos x
+            // if yaw = 90 + 180, be on neg z
+            // if yaw = 180 + 180, be on pos x
+            // if yaw = -90 + 180, be on pos z
+            // neg cos pos sin
 
             // if at correct y level, cancel y
-            if (Math.abs(owner.getY() - getY()) < 0.2) {
+            if (Math.abs(targetY - getY()) < 0.0002) {
                 newY = -getVelocity().getY();
             }
 
-            setVelocity(getVelocity().add(newX, newY, newZ));
-
+            Vec3d addVelocity = getVelocity().add(newX, newY, newZ);
+            setVelocity(addVelocity);
+            lookAtEntity(owner, 10, 10); // TODO: Look ahead of owner
         }
     }
 
