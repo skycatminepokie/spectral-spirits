@@ -8,6 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
 // Made with Blockbench 4.10.2
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
+@SuppressWarnings("all") // I'm not messing with it lol
 public class SpectralSpiritModel extends EntityModel<SpectralSpiritEntity> {
     private final ModelPart bb_main;
     public SpectralSpiritModel(ModelPart root) {
