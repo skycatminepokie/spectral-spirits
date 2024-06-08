@@ -1,6 +1,7 @@
 package com.skycatdev.spectralspirits.entity;
 
 import com.skycatdev.spectralspirits.SpectralSpiritsClient;
+import com.skycatdev.spectralspirits.entity.SpectralSpiritModel;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
@@ -16,4 +17,6 @@ public class SpectralSpiritRenderer extends MobEntityRenderer<SpectralSpiritEnti
     public Identifier getTexture(SpectralSpiritEntity entity) {
         return Identifier.of(MOD_ID, "textures/entity/spectral_spirit/fire_spirit.png");
     }
+
+
 }
