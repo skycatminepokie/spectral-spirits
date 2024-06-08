@@ -12,17 +12,17 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static net.minecraft.entity.mob.MobEntity.createMobAttributes;
+
 
 public class SpectralSpirits implements ModInitializer {
 	public static final String MOD_ID = "spectral-spirits";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final EntityType<SpectralSpiritEntity> SPECTRAL_SPIRIT = Registry.register(Registries.ENTITY_TYPE,
 			Identifier.of(MOD_ID, "spectral_spirit"),
-			EntityType.Builder.create(SpectralSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).build());
+			EntityType.Builder.create(SpectralSpiritEntity::new, SpawnGroup.MISC).dimensions(0.6f, 0.5f).build());
 
 	@Override
 	public void onInitialize() {
-		FabricDefaultAttributeRegistry.register(SPECTRAL_SPIRIT, SpectralSpiritEntity.createMobAttributes().add(EntityAttributes.GENERIC_FLYING_SPEED, 1));
+		FabricDefaultAttributeRegistry.register(SPECTRAL_SPIRIT, SpectralSpiritEntity.createMobAttributes().add(EntityAttributes.GENERIC_FLYING_SPEED, 0.8));
 	}
 }
