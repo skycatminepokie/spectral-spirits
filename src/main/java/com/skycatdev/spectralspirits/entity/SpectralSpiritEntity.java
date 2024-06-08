@@ -69,19 +69,16 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
             double targetZ = owner.getZ();
             double regYaw = owner.getBodyYaw() + 180;
 
+            // Stay on the right-hand side
             targetX += Math.cos(Math.toRadians(regYaw));
             targetZ += Math.sin(Math.toRadians(regYaw));
+
             double d = (targetX - getX()) / 3f;
             double e = (targetY - getY()) / 15f;
             double g = (targetZ - getZ()) / 3f;
             double newX = Math.copySign(d * d * 0.4, d);
             double newY = Math.copySign(e * e * 0.4, e);
             double newZ = Math.copySign(g * g * 0.4, g);
-            // if yaw = 0 + 180, be on pos x
-            // if yaw = 90 + 180, be on neg z
-            // if yaw = 180 + 180, be on pos x
-            // if yaw = -90 + 180, be on pos z
-            // neg cos pos sin
 
             // if at correct y level, cancel y
             if (Math.abs(targetY - getY()) < 0.0002) {
