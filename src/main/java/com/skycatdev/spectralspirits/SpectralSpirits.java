@@ -19,8 +19,13 @@ public class SpectralSpirits implements ModInitializer {
 			Identifier.of(MOD_ID, "spectral_spirit"),
 			EntityType.Builder.create(SpectralSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).build());
 
+	public static final EntityType<SpectralSpiritEntity> FIRE_SPIRIT = Registry.register(Registries.ENTITY_TYPE,
+			Identifier.of(MOD_ID, "fire_spirit"),
+			EntityType.Builder.create(SpectralSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).build());
+
 	@Override
 	public void onInitialize() {
 		FabricDefaultAttributeRegistry.register(SPECTRAL_SPIRIT, SpectralSpiritEntity.createMobAttributes().add(EntityAttributes.GENERIC_FLYING_SPEED, 1));
+		FabricDefaultAttributeRegistry.register(FIRE_SPIRIT, SpectralSpiritEntity.createMobAttributes().add(EntityAttributes.GENERIC_FLYING_SPEED, 1));
 	}
 }
