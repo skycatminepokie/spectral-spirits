@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 import static com.skycatdev.spectralspirits.SpectralSpirits.MOD_ID;
 
 public class SpectralSpiritsClient implements ClientModInitializer {
-	public static final EntityModelLayer SPECTRAL_SPIRIT_MODEL_LAYER = new EntityModelLayer(Identifier.of(MOD_ID, "spectral_spirit"), "main");
+	public static final EntityModelLayer SPECTRAL_SPIRIT_MODEL_LAYER = new EntityModelLayer(Identifier.of(MOD_ID, "fire_spirit"), "main");
 	@Override
 	public void onInitializeClient() {
 		// EntityRendererRegistry.register(SpectralSpirits.SPECTRAL_SPIRIT, SpectralSpiritRenderer::new);

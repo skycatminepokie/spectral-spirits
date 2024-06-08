@@ -2,18 +2,14 @@ package com.skycatdev.spectralspirits.entity;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 
 
-public class SpectralSpiritModel extends EntityModel<SpectralSpiritEntity> {
+public class SpectralSpiritModel<T extends SpectralSpiritEntity> extends SinglePartEntityModel<SpectralSpiritEntity> {
 	private final ModelPart spirit;
-	private final ModelPart shell;
-	private final ModelPart core;
 	public SpectralSpiritModel(ModelPart root) {
 		this.spirit = root.getChild("spirit");
-		this.shell = root.getChild("shell");
-		this.core = root.getChild("core");
 	}
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
@@ -33,6 +29,11 @@ public class SpectralSpiritModel extends EntityModel<SpectralSpiritEntity> {
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
 		spirit.render(matrices, vertexConsumer, light, overlay, color);
+	}
+
+	@Override
+	public ModelPart getPart() {
+		return spirit;
 	}
 
 	@Override

@@ -7,9 +7,9 @@ import net.minecraft.util.Identifier;
 
 import static com.skycatdev.spectralspirits.SpectralSpirits.MOD_ID;
 
-public class SpectralSpiritRenderer extends MobEntityRenderer<SpectralSpiritEntity, SpectralSpiritModel> {
+public class SpectralSpiritRenderer extends MobEntityRenderer<SpectralSpiritEntity, SpectralSpiritModel<SpectralSpiritEntity>> {
     public SpectralSpiritRenderer(EntityRendererFactory.Context context) {
-        super(context, new SpectralSpiritModel(context.getPart(SpectralSpiritsClient.SPECTRAL_SPIRIT_MODEL_LAYER)), 0f);
+        super(context, new SpectralSpiritModel<>(context.getPart(SpectralSpiritsClient.SPECTRAL_SPIRIT_MODEL_LAYER)), 0f);
     }
 
     @Override
