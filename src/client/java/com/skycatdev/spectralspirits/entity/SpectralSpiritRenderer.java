@@ -14,6 +14,6 @@ public class SpectralSpiritRenderer extends MobEntityRenderer<SpectralSpiritEnti
 
     @Override
     public Identifier getTexture(SpectralSpiritEntity entity) {
-        return Identifier.of(MOD_ID, "textures/entity/spectral_spirit/spectral_spirit.png");
+        return Identifier.of(MOD_ID, "textures/entity/spectral_spirit/fire_spirit.png");
     }
 }
