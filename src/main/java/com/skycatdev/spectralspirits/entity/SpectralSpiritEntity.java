@@ -5,10 +5,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -35,15 +33,6 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
     }
 
     @Override
-    public boolean damage(DamageSource damageSource, float amount) {
-        if (damageSource.getAttacker() instanceof ServerPlayerEntity player) {
-            owner = player;
-            teleport(player.getX(), player.getY(), player.getZ() + 0.5, false);
-        }
-        return super.damage(damageSource, amount);
-    }
-
-    @Override
     public void tick() {
         setNoGravity(true);
         super.tick();
@@ -53,6 +42,10 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
     @Override
     public Entity getOwner() {
         return owner;
+    }
+
+    public void setOwner(PlayerEntity owner) {
+        this.owner = owner;
     }
 
     public class FollowOwnerGoal extends Goal {

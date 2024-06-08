@@ -1,6 +1,7 @@
 package com.skycatdev.spectralspirits.entity;
 
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
@@ -12,6 +13,7 @@ import net.minecraft.client.util.math.MatrixStack;
 public class TestSpectralSpiritModel<T extends TestSpectralSpiritEntity> extends SinglePartEntityModel<T> {
     private final ModelPart bb_main;
     public TestSpectralSpiritModel(ModelPart root) {
+        super(RenderLayer::getEntityTranslucent);
         this.bb_main = root.getChild("bb_main");
     }
     public static TexturedModelData getTexturedModelData() {
