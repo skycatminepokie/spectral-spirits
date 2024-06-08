@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class SpectralSpiritEntity extends MobEntity implements Ownable {
+public abstract class SpectralSpiritEntity extends MobEntity implements Ownable {
     protected PlayerEntity owner;
 
     public SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world) {

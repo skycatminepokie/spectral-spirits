@@ -1,7 +1,7 @@
 package com.skycatdev.spectralspirits;
 
-import com.skycatdev.spectralspirits.entity.SpectralSpiritModel;
-import com.skycatdev.spectralspirits.entity.SpectralSpiritRenderer;
+import com.skycatdev.spectralspirits.entity.TestSpectralSpiritModel;
+import com.skycatdev.spectralspirits.entity.TestSpectralSpiritRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -14,7 +14,7 @@ public class SpectralSpiritsClient implements ClientModInitializer {
 	public static final EntityModelLayer SPECTRAL_SPIRIT_MODEL_LAYER = new EntityModelLayer(Identifier.of(MOD_ID, "spectral_spirit"), "main");
 	@Override
 	public void onInitializeClient() {
-		EntityRendererRegistry.register(SpectralSpirits.SPECTRAL_SPIRIT, SpectralSpiritRenderer::new);
-		EntityModelLayerRegistry.registerModelLayer(SPECTRAL_SPIRIT_MODEL_LAYER, SpectralSpiritModel::getTexturedModelData);
+		EntityRendererRegistry.register(SpectralSpirits.TEST_SPECTRAL_SPIRIT, TestSpectralSpiritRenderer::new);
+		EntityModelLayerRegistry.registerModelLayer(SPECTRAL_SPIRIT_MODEL_LAYER, TestSpectralSpiritModel::getTexturedModelData);
 	}
 }
