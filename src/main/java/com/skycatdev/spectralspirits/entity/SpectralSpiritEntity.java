@@ -1,5 +1,6 @@
 package com.skycatdev.spectralspirits.entity;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Ownable;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Supplier;
 
 public abstract class SpectralSpiritEntity extends MobEntity implements Ownable {
+    public static final Codec<SpectralSpiritEntity> CODEC = null; // TODO
     protected PlayerEntity owner;
 
     public SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world) {

@@ -4,6 +4,8 @@ import com.skycatdev.spectralspirits.command.CommandHandler;
 import com.skycatdev.spectralspirits.entity.FireSpiritEntity;
 import com.skycatdev.spectralspirits.entity.TestSpectralSpiritEntity;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EntityType;
@@ -24,6 +26,7 @@ public class SpectralSpirits implements ModInitializer {
 	public static final EntityType<FireSpiritEntity> FIRE_SPIRIT = Registry.register(Registries.ENTITY_TYPE,
 			Identifier.of(MOD_ID, "fire_spirit"),
 			EntityType.Builder.create(FireSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).disableSaving().disableSummon().build());
+	@SuppressWarnings("UnstableApiUsage") public static final AttachmentType<SpiritProfile> SPECTRAL_SPIRIT_ATTACHMENT = AttachmentRegistry.createPersistent(Identifier.of(MOD_ID, "spirit_profile"), SpiritProfile.CODEC);
 
 	@Override
 	public void onInitialize() {
