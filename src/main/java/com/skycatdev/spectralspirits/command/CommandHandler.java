@@ -5,13 +5,11 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.skycatdev.spectralspirits.SpectralSpirits;
-import com.skycatdev.spectralspirits.entity.FireSpiritEntity;
+import com.skycatdev.spectralspirits.SpiritProfile;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.command.SummonCommand;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import static net.minecraft.server.command.CommandManager.argument;
@@ -37,7 +35,8 @@ public class CommandHandler {
 
     private static int grantSpectral(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = EntityArgumentType.getPlayer(context, "player");
-        ((FireSpiritEntity) SummonCommand.summon(context.getSource(), SpectralSpirits.FIRE_SPIRIT.getRegistryEntry(), player.getPos(), new NbtCompound(), true)).setOwner(player);
+        //((FireSpiritEntity) SummonCommand.summon(context.getSource(), SpectralSpirits.FIRE_SPIRIT.getRegistryEntry(), player.getPos(), new NbtCompound(), true)).setOwner(player);
+        player.getAttachedOrSet(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, new SpiritProfile("bobby")).createEntity(SpectralSpirits.FIRE_SPIRIT, context.getSource().getWorld(), player);
         return Command.SINGLE_SUCCESS;
     }
 }

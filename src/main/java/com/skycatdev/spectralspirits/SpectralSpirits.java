@@ -26,7 +26,7 @@ public class SpectralSpirits implements ModInitializer {
 	public static final EntityType<FireSpiritEntity> FIRE_SPIRIT = Registry.register(Registries.ENTITY_TYPE,
 			Identifier.of(MOD_ID, "fire_spirit"),
 			EntityType.Builder.create(FireSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).disableSaving().disableSummon().build());
-	@SuppressWarnings("UnstableApiUsage") public static final AttachmentType<SpiritProfile> SPECTRAL_SPIRIT_ATTACHMENT = AttachmentRegistry.createPersistent(Identifier.of(MOD_ID, "spirit_profile"), SpiritProfile.CODEC);
+	@SuppressWarnings("UnstableApiUsage") public static final AttachmentType<SpiritProfile> SPECTRAL_SPIRIT_ATTACHMENT = AttachmentRegistry.<SpiritProfile>builder().copyOnDeath().persistent(SpiritProfile.CODEC).buildAndRegister(Identifier.of(MOD_ID, "spirit_profile"));
 
 	@Override
 	public void onInitialize() {

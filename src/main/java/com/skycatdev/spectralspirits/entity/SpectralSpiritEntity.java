@@ -1,6 +1,7 @@
 package com.skycatdev.spectralspirits.entity;
 
 import com.mojang.serialization.Codec;
+import com.skycatdev.spectralspirits.SpiritProfile;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Ownable;
@@ -8,6 +9,7 @@ import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -17,14 +19,20 @@ import java.util.function.Supplier;
 public abstract class SpectralSpiritEntity extends MobEntity implements Ownable {
     public static final Codec<SpectralSpiritEntity> CODEC = null; // TODO
     protected PlayerEntity owner;
+    protected SpiritProfile profile;
 
     public SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world) {
         super(entityType, world);
-        // setNoGravity(true);
         noClip = true;
         owner = null;
         moveControl = new FlightMoveControl(this, 1, true);
         intersectionChecked = false;
+        profile = null;
+    }
+
+    public void setProfile(SpiritProfile profile) {
+        this.profile = profile;
+        this.setCustomName(Text.of(profile.getName())); // WARN: Testing
     }
 
     @Override
