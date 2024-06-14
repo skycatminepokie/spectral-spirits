@@ -5,7 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.skycatdev.spectralspirits.SpectralSpirits;
-import com.skycatdev.spectralspirits.entity.TestSpectralSpiritEntity;
+import com.skycatdev.spectralspirits.entity.FireSpiritEntity;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.nbt.NbtCompound;
@@ -37,7 +37,7 @@ public class CommandHandler {
 
     private static int grantSpectral(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = EntityArgumentType.getPlayer(context, "player");
-        ((TestSpectralSpiritEntity) SummonCommand.summon(context.getSource(), SpectralSpirits.TEST_SPECTRAL_SPIRIT.getRegistryEntry(), player.getPos(), new NbtCompound(), true)).setOwner(player);
+        ((FireSpiritEntity) SummonCommand.summon(context.getSource(), SpectralSpirits.FIRE_SPIRIT.getRegistryEntry(), player.getPos(), new NbtCompound(), true)).setOwner(player);
         return Command.SINGLE_SUCCESS;
     }
 }
