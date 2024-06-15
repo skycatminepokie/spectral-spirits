@@ -16,7 +16,6 @@ import java.util.function.Supplier;
 
 public abstract class SpectralSpiritEntity extends MobEntity implements Ownable {
     protected PlayerEntity owner;
-    protected SpiritProfile profile;
 
     public SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world) {
         super(entityType, world);
@@ -24,11 +23,14 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
         owner = null;
         moveControl = new FlightMoveControl(this, 1, true);
         intersectionChecked = false;
-        profile = null;
     }
 
-    public void setProfile(SpiritProfile profile) {
-        this.profile = profile;
+    public void updateFromProfile(SpiritProfile profile) {
+        // TODO
+    }
+
+    public SpiritProfile toProfile() {
+        return new SpiritProfile(); // TODO
     }
 
     @Override

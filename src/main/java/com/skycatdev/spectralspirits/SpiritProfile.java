@@ -19,7 +19,7 @@ public class SpiritProfile {
         if (world instanceof ServerWorld serverWorld) {
             return entityType.create(serverWorld, (spirit) -> {
                 spirit.setOwner(owner);
-                spirit.setProfile(this);
+                spirit.updateFromProfile(this);
                 spirit.setOwner(owner);
                 spirit.refreshPositionAndAngles(spirit.getPos(), spirit.getYaw(), spirit.getPitch());
                 serverWorld.spawnEntity(spirit);
