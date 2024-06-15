@@ -35,8 +35,7 @@ public class CommandHandler {
 
     private static int grantSpectral(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = EntityArgumentType.getPlayer(context, "player");
-        //((FireSpiritEntity) SummonCommand.summon(context.getSource(), SpectralSpirits.FIRE_SPIRIT.getRegistryEntry(), player.getPos(), new NbtCompound(), true)).setOwner(player);
-        player.getAttachedOrSet(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, new SpiritProfile("bobby")).createEntity(SpectralSpirits.FIRE_SPIRIT, context.getSource().getWorld(), player);
+        player.getAttachedOrSet(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, new SpiritProfile()).createEntity(SpectralSpirits.FIRE_SPIRIT, context.getSource().getWorld(), player);
         return Command.SINGLE_SUCCESS;
     }
 }
