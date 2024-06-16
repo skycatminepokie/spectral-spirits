@@ -4,6 +4,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.skycatdev.spectralspirits.SpectralSpiritHolder;
 import com.skycatdev.spectralspirits.SpectralSpirits;
 import com.skycatdev.spectralspirits.SpiritProfile;
 import net.minecraft.command.CommandRegistryAccess;
@@ -35,7 +36,9 @@ public class CommandHandler {
 
     private static int grantSpectral(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = EntityArgumentType.getPlayer(context, "player");
-        player.getAttachedOrSet(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, new SpiritProfile()).createEntity(SpectralSpirits.FIRE_SPIRIT, context.getSource().getWorld(), player);
+        var profile = player.getAttachedOrSet(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, new SpiritProfile());
+        var spirit = profile.createEntity(SpectralSpirits.FIRE_SPIRIT, context.getSource().getWorld(), player);
+        ((SpectralSpiritHolder) player).setSpirit(spirit);
         return Command.SINGLE_SUCCESS;
     }
 }
