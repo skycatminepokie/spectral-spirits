@@ -1,6 +1,5 @@
 package com.skycatdev.spectralspirits;
 
-import com.mojang.serialization.Codec;
 import com.skycatdev.spectralspirits.entity.SpectralSpiritEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -9,11 +8,8 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class SpiritProfile {
-    public static final Codec<SpiritProfile> CODEC = Codec.unit(SpiritProfile::new); // TODO
-
-    public SpiritProfile() {
-    }
+public record SpiritProfile(/*Set<AbilityType> abilities*/) {
+    // public static final Codec<HashSet<AbilityType>> CODEC = Codec.list(AbilityTypes.REGISTRY.getCodec()).xmap(Sets::newHashSet, Lists::newArrayList); // TODO
 
     public <T extends SpectralSpiritEntity> @Nullable T createEntity(EntityType<T> entityType, World world, PlayerEntity owner) {
         if (world instanceof ServerWorld serverWorld) {
