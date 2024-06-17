@@ -13,6 +13,8 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.util.ArrayList;
+
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
@@ -36,7 +38,7 @@ public class CommandHandler {
 
     private static int grantSpectral(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = EntityArgumentType.getPlayer(context, "player");
-        var profile = player.getAttachedOrSet(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, new SpiritProfile());
+        var profile = player.getAttachedOrSet(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, new SpiritProfile(new ArrayList<>()));
         var spirit = profile.createEntity(SpectralSpirits.FIRE_SPIRIT, context.getSource().getWorld(), player);
         ((SpectralSpiritHolder) player).setSpirit(spirit);
         return Command.SINGLE_SUCCESS;

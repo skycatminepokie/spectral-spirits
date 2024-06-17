@@ -12,6 +12,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.function.Supplier;
 
 public abstract class SpectralSpiritEntity extends MobEntity implements Ownable {
@@ -30,7 +31,7 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
     }
 
     public SpiritProfile toProfile() {
-        return new SpiritProfile(); // TODO
+        return new SpiritProfile(new ArrayList<>()); // TODO
     }
 
     @Override
