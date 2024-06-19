@@ -13,10 +13,11 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Set;
 
-public record SpiritProfile(List<AbilityType> abilities) {
+public record SpiritProfile(Set<AbilityType> abilities) {
     public static final Codec<SpiritProfile> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            AbilityTypes.REGISTRY.getCodec().listOf().fieldOf("abilities").forGetter(SpiritProfile::abilities) // TODO: Use set instead of list. DFU make me sad rn.
+            AbilityTypes.REGISTRY.getCodec().listOf().xmap(SpiritProfile::abilityListToSet, SpiritProfile::abilitySetToList).fieldOf("abilities").forGetter(SpiritProfile::abilities)
     ).apply(instance, SpiritProfile::new));
 
     public <T extends SpectralSpiritEntity> @Nullable T createEntity(EntityType<T> entityType, World world, PlayerEntity owner) {
@@ -30,5 +31,13 @@ public record SpiritProfile(List<AbilityType> abilities) {
             }, owner.getBlockPos(), SpawnReason.MOB_SUMMONED, false, false);
         }
         return null;
+    }
+
+    private static Set<AbilityType> abilityListToSet(List<AbilityType> list) {
+        return Set.copyOf(list);
+    }
+
+    private static List<AbilityType> abilitySetToList(Set<AbilityType> set){
+        return List.copyOf(set);
     }
 }
