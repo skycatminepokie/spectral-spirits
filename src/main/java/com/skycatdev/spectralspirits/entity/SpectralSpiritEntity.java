@@ -1,6 +1,8 @@
 package com.skycatdev.spectralspirits.entity;
 
 import com.skycatdev.spectralspirits.SpiritProfile;
+import com.skycatdev.spectralspirits.ability.Ability;
+import com.skycatdev.spectralspirits.ability.AbilityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Ownable;
@@ -12,10 +14,13 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public abstract class SpectralSpiritEntity extends MobEntity implements Ownable {
     protected PlayerEntity owner;
+    protected Set<Ability> abilities = new HashSet<>();
 
     public SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world) {
         super(entityType, world);
@@ -25,12 +30,29 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
         intersectionChecked = false;
     }
 
+    /**
+     * @return {@link Set#add(Object)}
+     */
+    public boolean addAbility(Ability ability) {
+        return abilities.add(ability);
+    }
+
     public void updateFromProfile(SpiritProfile profile) {
         // TODO
+        abilities = profile.abilities();
     }
 
     public SpiritProfile toProfile() {
-        return null; // TODO
+        return new SpiritProfile(abilities); // TODO
+    }
+
+    public boolean hasActiveAbility(AbilityType<?> abilityType) { // TODO: Make this less expensive
+        for (Ability ability : abilities) {
+            if (ability.isActive() && ability.getType().equals(abilityType)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.skycatdev.spectralspirits.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.skycatdev.spectralspirits.SpectralSpiritHolder;
 import com.skycatdev.spectralspirits.SpectralSpirits;
+import com.skycatdev.spectralspirits.ability.AbilityTypes;
 import com.skycatdev.spectralspirits.entity.SpectralSpiritEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -35,18 +36,18 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Spectral
 
     @ModifyReturnValue(method = "isInvulnerableTo", at = @At("RETURN"))
     protected boolean spectral_spirits$modifyIsInvulnerableTo(boolean original) {
-        return original || (spectral_spirits$spectral_spirit != null && spectral_spirits$spectral_spirit.getType().equals(SpectralSpirits.FIRE_SPIRIT)); // WARN Testing fire invuln
+        return original || (spectral_spirits$spectral_spirit != null && spectral_spirits$spectral_spirit.hasActiveAbility(AbilityTypes.FIRE_RESISTANCE));
     }
 
     @Unique
     @Override
-    public SpectralSpiritEntity getSpirit() {
+    public SpectralSpiritEntity spectral_spirits$getSpirit() {
         return spectral_spirits$spectral_spirit;
     }
 
     @Unique
     @Override
-    public void setSpirit(SpectralSpiritEntity spirit) {
+    public void spectral_spirits$setSpirit(SpectralSpiritEntity spirit) {
         spectral_spirits$spectral_spirit = spirit;
     }
 }
