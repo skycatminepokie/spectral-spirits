@@ -2,8 +2,7 @@ package com.skycatdev.spectralspirits;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.skycatdev.spectralspirits.ability.AbilityType;
-import com.skycatdev.spectralspirits.ability.AbilityTypes;
+import com.skycatdev.spectralspirits.ability.Ability;
 import com.skycatdev.spectralspirits.entity.SpectralSpiritEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -15,9 +14,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-public record SpiritProfile(Set<AbilityType> abilities) {
+public record SpiritProfile(Set<Ability> abilities) {
     public static final Codec<SpiritProfile> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            AbilityTypes.REGISTRY.getCodec().listOf().xmap(SpiritProfile::abilityListToSet, SpiritProfile::abilitySetToList).fieldOf("abilities").forGetter(SpiritProfile::abilities)
+            Ability.CODEC.listOf().xmap(SpiritProfile::abilityListToSet, SpiritProfile::abilitySetToList).fieldOf("abilities").forGetter(SpiritProfile::abilities)
     ).apply(instance, SpiritProfile::new));
 
     public <T extends SpectralSpiritEntity> @Nullable T createEntity(EntityType<T> entityType, World world, PlayerEntity owner) {
@@ -33,11 +32,11 @@ public record SpiritProfile(Set<AbilityType> abilities) {
         return null;
     }
 
-    private static Set<AbilityType> abilityListToSet(List<AbilityType> list) {
+    private static Set<Ability> abilityListToSet(List<Ability> list) {
         return Set.copyOf(list);
     }
 
-    private static List<AbilityType> abilitySetToList(Set<AbilityType> set){
+    private static List<Ability> abilitySetToList(Set<Ability> set){
         return List.copyOf(set);
     }
 }
