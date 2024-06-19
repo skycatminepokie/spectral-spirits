@@ -18,20 +18,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SpectralSpirits implements ModInitializer {
-	public static final String MOD_ID = "spectral-spirits";
+    public static final String MOD_ID = "spectral-spirits";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static final EntityType<TestSpectralSpiritEntity> TEST_SPECTRAL_SPIRIT = Registry.register(Registries.ENTITY_TYPE,
-			Identifier.of(MOD_ID, "test_spectral_spirit"),
-			EntityType.Builder.create(TestSpectralSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).disableSaving().disableSummon().build());
-	public static final EntityType<FireSpiritEntity> FIRE_SPIRIT = Registry.register(Registries.ENTITY_TYPE,
-			Identifier.of(MOD_ID, "fire_spirit"),
-			EntityType.Builder.create(FireSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).disableSaving().disableSummon().build());
-	@SuppressWarnings("UnstableApiUsage") public static final AttachmentType<SpiritProfile> SPECTRAL_SPIRIT_ATTACHMENT = AttachmentRegistry.<SpiritProfile>builder().copyOnDeath().persistent(SpiritProfile.CODEC).buildAndRegister(Identifier.of(MOD_ID, "spirit_profile"));
+    public static final EntityType<TestSpectralSpiritEntity> TEST_SPECTRAL_SPIRIT = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(MOD_ID, "test_spectral_spirit"),
+            EntityType.Builder.create(TestSpectralSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).disableSaving().disableSummon().build());
+    public static final EntityType<FireSpiritEntity> FIRE_SPIRIT = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(MOD_ID, "fire_spirit"),
+            EntityType.Builder.create(FireSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).disableSaving().disableSummon().build());
+    @SuppressWarnings("UnstableApiUsage") public static final AttachmentType<SpiritProfile> SPECTRAL_SPIRIT_ATTACHMENT = AttachmentRegistry.<SpiritProfile>builder().copyOnDeath().persistent(SpiritProfile.CODEC).buildAndRegister(Identifier.of(MOD_ID, "spirit_profile"));
 
-	@Override
-	public void onInitialize() {
-		FabricDefaultAttributeRegistry.register(TEST_SPECTRAL_SPIRIT, TestSpectralSpiritEntity.createMobAttributes().add(EntityAttributes.GENERIC_FLYING_SPEED, 1));
-		FabricDefaultAttributeRegistry.register(FIRE_SPIRIT, FireSpiritEntity.createMobAttributes().add(EntityAttributes.GENERIC_FLYING_SPEED, 1));
-		CommandRegistrationCallback.EVENT.register(CommandHandler::register);
-	}
+    @Override
+    public void onInitialize() {
+        FabricDefaultAttributeRegistry.register(TEST_SPECTRAL_SPIRIT, TestSpectralSpiritEntity.createMobAttributes().add(EntityAttributes.GENERIC_FLYING_SPEED, 1));
+        FabricDefaultAttributeRegistry.register(FIRE_SPIRIT, FireSpiritEntity.createMobAttributes().add(EntityAttributes.GENERIC_FLYING_SPEED, 1));
+        CommandRegistrationCallback.EVENT.register(CommandHandler::register);
+    }
 }

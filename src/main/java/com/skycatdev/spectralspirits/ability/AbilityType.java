@@ -26,6 +26,11 @@ public class AbilityType<T extends Ability> {
         return codec;
     }
 
+    @Contract("->new")
+    public @NotNull ItemStack getIcon() {
+        return icon.copy();
+    }
+
     @Contract(pure = true)
     public @NotNull Identifier getId() {
         return id;
@@ -34,10 +39,5 @@ public class AbilityType<T extends Ability> {
     @Contract(pure = true)
     public boolean isAmbient() {
         return ambient;
-    }
-
-    @Contract("->new")
-    public @NotNull ItemStack getIcon() {
-        return icon.copy();
     }
 }

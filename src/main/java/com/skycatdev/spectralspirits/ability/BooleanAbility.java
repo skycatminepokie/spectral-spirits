@@ -1,6 +1,5 @@
 package com.skycatdev.spectralspirits.ability;
 
-import com.mojang.serialization.Codec;
 import eu.pb4.sgui.api.elements.GuiElement;
 import eu.pb4.sgui.api.elements.GuiElementBuilder;
 import net.minecraft.text.Text;

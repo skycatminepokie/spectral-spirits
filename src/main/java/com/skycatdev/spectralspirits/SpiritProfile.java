@@ -19,6 +19,14 @@ public record SpiritProfile(Set<Ability> abilities) {
             Ability.CODEC.listOf().xmap(SpiritProfile::abilityListToSet, SpiritProfile::abilitySetToList).fieldOf("abilities").forGetter(SpiritProfile::abilities)
     ).apply(instance, SpiritProfile::new));
 
+    private static Set<Ability> abilityListToSet(List<Ability> list) {
+        return Set.copyOf(list);
+    }
+
+    private static List<Ability> abilitySetToList(Set<Ability> set) {
+        return List.copyOf(set);
+    }
+
     public <T extends SpectralSpiritEntity> @Nullable T createEntity(EntityType<T> entityType, World world, PlayerEntity owner) {
         if (world instanceof ServerWorld serverWorld) {
             return entityType.create(serverWorld, (spirit) -> {
@@ -30,13 +38,5 @@ public record SpiritProfile(Set<Ability> abilities) {
             }, owner.getBlockPos(), SpawnReason.MOB_SUMMONED, false, false);
         }
         return null;
-    }
-
-    private static Set<Ability> abilityListToSet(List<Ability> list) {
-        return Set.copyOf(list);
-    }
-
-    private static List<Ability> abilitySetToList(Set<Ability> set){
-        return List.copyOf(set);
     }
 }
