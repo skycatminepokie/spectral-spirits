@@ -27,7 +27,7 @@ public record SpiritProfile(Set<Ability> abilities) {
         return List.copyOf(set);
     }
 
-    public <T extends SpectralSpiritEntity> @Nullable T createEntity(EntityType<T> entityType, World world, PlayerEntity owner) {
+    public <T extends SpectralSpiritEntity> @Nullable T spawnEntity(EntityType<T> entityType, World world, PlayerEntity owner) {
         if (world instanceof ServerWorld serverWorld) {
             return entityType.create(serverWorld, (spirit) -> {
                 spirit.setOwner(owner);
