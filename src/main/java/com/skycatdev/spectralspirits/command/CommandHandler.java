@@ -46,8 +46,8 @@ public class CommandHandler {
 
     private static int grantSpectral(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = EntityArgumentType.getPlayer(context, "player");
-        var profile = player.getAttachedOrSet(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, new SpiritProfile(new HashSet<>()));
-        var spirit = profile.spawnEntity(SpectralSpirits.FIRE_SPIRIT, context.getSource().getWorld(), player); // TODO: Respect types
+        var profile = player.getAttachedOrSet(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, new SpiritProfile(SpectralSpirits.FIRE_SPIRIT, new HashSet<>()));
+        var spirit = profile.spawnEntity(context.getSource().getWorld(), player); // TODO: Respect types
         ((SpectralSpiritHolder) player).spectral_spirits$setSpirit(spirit);
         return Command.SINGLE_SUCCESS;
     }

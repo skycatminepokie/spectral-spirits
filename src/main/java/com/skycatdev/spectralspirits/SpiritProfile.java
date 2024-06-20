@@ -14,8 +14,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-public record SpiritProfile(Set<Ability> abilities) {
+public record SpiritProfile(EntityType<? extends SpectralSpiritEntity> type, Set<Ability> abilities) {
     public static final Codec<SpiritProfile> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            SpectralSpirits.SPIRIT_TYPE_REGISTRY.getCodec().fieldOf("type").forGetter(SpiritProfile::type),
             Ability.CODEC.listOf().xmap(SpiritProfile::abilityListToSet, SpiritProfile::abilitySetToList).fieldOf("abilities").forGetter(SpiritProfile::abilities)
     ).apply(instance, SpiritProfile::new));
 
@@ -27,9 +28,9 @@ public record SpiritProfile(Set<Ability> abilities) {
         return List.copyOf(set);
     }
 
-    public <T extends SpectralSpiritEntity> @Nullable T spawnEntity(EntityType<T> entityType, World world, PlayerEntity owner) {
+    public @Nullable SpectralSpiritEntity spawnEntity(World world, PlayerEntity owner) {
         if (world instanceof ServerWorld serverWorld) {
-            return entityType.create(serverWorld, (spirit) -> {
+            return type.create(serverWorld, (spirit) -> {
                 spirit.setOwner(owner);
                 spirit.updateFromProfile(this);
                 spirit.setOwner(owner);

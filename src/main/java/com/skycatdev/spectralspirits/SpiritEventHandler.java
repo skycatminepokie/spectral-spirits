@@ -8,8 +8,8 @@ public class SpiritEventHandler {
     public static void summon(SpiritProfile profile, ServerPlayerEntity player) {
         SpectralSpiritEntity currentSpirit = ((SpectralSpiritHolder)player).spectral_spirits$getSpirit();
         currentSpirit.discard();
-        profile.spawnEntity(SpectralSpirits.FIRE_SPIRIT, player.getWorld(), player);
-        ((SpectralSpiritHolder)player).spectral_spirits$setSpirit(profile.spawnEntity(SpectralSpirits.FIRE_SPIRIT, player.getWorld(), player));
+        profile.spawnEntity(player.getWorld(), player);
+        ((SpectralSpiritHolder)player).spectral_spirits$setSpirit(profile.spawnEntity(player.getWorld(), player));
     }
 
     protected static void saveSpirit(ServerPlayerEntity player) { // TODO: Move this to SpectralSpiritHolder?

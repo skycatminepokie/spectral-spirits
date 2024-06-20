@@ -21,6 +21,7 @@ import java.util.function.Supplier;
 public abstract class SpectralSpiritEntity extends MobEntity implements Ownable {
     protected PlayerEntity owner;
     protected Set<Ability> abilities = new HashSet<>();
+    protected final EntityType<? extends SpectralSpiritEntity> spiritType;
 
     public SpectralSpiritEntity(EntityType<? extends SpectralSpiritEntity> entityType, World world) {
         super(entityType, world);
@@ -28,6 +29,7 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
         owner = null;
         moveControl = new FlightMoveControl(this, 1, true);
         intersectionChecked = false;
+        spiritType = entityType;
     }
 
     /**
@@ -43,7 +45,7 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
     }
 
     public SpiritProfile toProfile() {
-        return new SpiritProfile(abilities); // TODO
+        return new SpiritProfile(spiritType, abilities); // TODO
     }
 
     public boolean hasActiveAbility(AbilityType<?> abilityType) { // TODO: Make this less expensive
