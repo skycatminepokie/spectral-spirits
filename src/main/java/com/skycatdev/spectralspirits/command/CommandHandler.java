@@ -8,6 +8,7 @@ import com.skycatdev.spectralspirits.SpectralSpiritHolder;
 import com.skycatdev.spectralspirits.SpectralSpirits;
 import com.skycatdev.spectralspirits.SpiritProfile;
 import com.skycatdev.spectralspirits.ability.FireResistanceAbility;
+import com.skycatdev.spectralspirits.gui.SummonSpiritGui;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
@@ -22,7 +23,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class CommandHandler {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess, CommandManager.RegistrationEnvironment environment) {
         var spectralSpirits = literal("spectralSpirits")
-                .requires((source) -> source.hasPermissionLevel(3))
+                .executes(CommandHandler::openGui)
                 .build();
         var grant = literal("grant")
                 .requires((source) -> source.hasPermissionLevel(3))
@@ -44,6 +45,12 @@ public class CommandHandler {
         dispatcher.getRoot().addChild(spectralSpirits);
     }
 
+    private static int openGui(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        new SummonSpiritGui(context.getSource().getPlayerOrThrow()).open();
+        return Command.SINGLE_SUCCESS;
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
     private static int grantSpectral(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = EntityArgumentType.getPlayer(context, "player");
         var profile = player.getAttachedOrSet(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, new SpiritProfile(SpectralSpirits.FIRE_SPIRIT, new HashSet<>()));

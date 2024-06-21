@@ -4,6 +4,7 @@ import com.skycatdev.spectralspirits.SpectralSpiritHolder;
 import com.skycatdev.spectralspirits.SpectralSpirits;
 import com.skycatdev.spectralspirits.SpiritEventHandler;
 import com.skycatdev.spectralspirits.SpiritProfile;
+import com.skycatdev.spectralspirits.ability.FireResistanceAbility;
 import com.skycatdev.spectralspirits.entity.SpectralSpiritEntity;
 import eu.pb4.sgui.api.elements.GuiElementBuilder;
 import eu.pb4.sgui.api.gui.SimpleGui;
@@ -11,6 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+
+import java.util.Set;
 
 public class SummonSpiritGui extends SimpleGui {
     protected SpectralSpiritEntity currentSpirit;
@@ -23,19 +27,16 @@ public class SummonSpiritGui extends SimpleGui {
         super(ScreenHandlerType.GENERIC_9X1, player, false);
         currentSpirit = ((SpectralSpiritHolder) player).spectral_spirits$getSpirit();
         // TODO: Handle generating these builders in SpiritProfile
-        var testSpiritElement = GuiElementBuilder.from(new ItemStack(Items.BARRIER));
-        var fireSpiritElement = GuiElementBuilder.from(new ItemStack(Items.FIRE_CHARGE));
-        if (currentSpirit.getType().equals(SpectralSpirits.FIRE_SPIRIT)) {
-            addSlot(fireSpiritElement.glow());
-            addSlot(testSpiritElement);
-        } else {
-            addSlot(testSpiritElement.glow());
-            addSlot(fireSpiritElement);
-        }
+        addSlot(GuiElementBuilder.from(new ItemStack(Items.OAK_SIGN)).setName(Text.of("TOGGLE SPIRIT")).setCallback(this::toggleSpirit));
     }
 
-    protected void onSelectSpiritType(SpiritProfile profile) {
-        SpiritEventHandler.summon(profile, player);
+    private void toggleSpirit() {
+        if (currentSpirit == null) {
+            SpiritEventHandler.summon(new SpiritProfile(SpectralSpirits.FIRE_SPIRIT, Set.of(new FireResistanceAbility(true, true))), player);
+        } else {
+            SpiritEventHandler.dismissSpirit(player);
+        }
+        close();
     }
 
 }

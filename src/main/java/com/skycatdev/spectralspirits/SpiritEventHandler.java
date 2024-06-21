@@ -7,13 +7,18 @@ public class SpiritEventHandler {
     // WARN public for testing, should be protected
     public static void summon(SpiritProfile profile, ServerPlayerEntity player) {
         SpectralSpiritEntity currentSpirit = ((SpectralSpiritHolder)player).spectral_spirits$getSpirit();
-        currentSpirit.discard();
-        profile.spawnEntity(player.getWorld(), player);
+        if (currentSpirit != null) {
+            currentSpirit.discard();
+        }
         ((SpectralSpiritHolder)player).spectral_spirits$setSpirit(profile.spawnEntity(player.getWorld(), player));
+        ((SpectralSpiritHolder) player).spectral_spirits$saveProfile(profile);
     }
 
-    protected static void saveSpirit(ServerPlayerEntity player) { // TODO: Move this to SpectralSpiritHolder?
-        SpectralSpiritEntity currentSpirit = ((SpectralSpiritHolder)player).spectral_spirits$getSpirit();
-        player.setAttached(SpectralSpirits.SPECTRAL_SPIRIT_ATTACHMENT, currentSpirit.toProfile());
+    public static void dismissSpirit(ServerPlayerEntity player) {
+        SpectralSpiritHolder holder = ((SpectralSpiritHolder) player);
+        SpectralSpiritEntity current = holder.spectral_spirits$getSpirit();
+        holder.spectral_spirits$saveProfile(current.toProfile());
+        holder.spectral_spirits$setSpirit(null);
+        current.discard();
     }
 }
