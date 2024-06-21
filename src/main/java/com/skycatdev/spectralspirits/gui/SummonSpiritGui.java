@@ -27,12 +27,13 @@ public class SummonSpiritGui extends SimpleGui {
         super(ScreenHandlerType.GENERIC_9X1, player, false);
         currentSpirit = ((SpectralSpiritHolder) player).spectral_spirits$getSpirit();
         // TODO: Handle generating these builders in SpiritProfile
-        addSlot(GuiElementBuilder.from(new ItemStack(Items.OAK_SIGN)).setName(Text.of("TOGGLE SPIRIT")).setCallback(this::toggleSpirit));
+        addSlot(GuiElementBuilder.from(new ItemStack(Items.OAK_SIGN)).setName(Text.of("Toggle Spirit")).setCallback(this::toggleSpirit));
+        setTitle(Text.of("Spectral Spirits"));
     }
 
     private void toggleSpirit() {
         if (currentSpirit == null) {
-            SpiritEventHandler.summon(new SpiritProfile(SpectralSpirits.FIRE_SPIRIT, Set.of(new FireResistanceAbility(true, true))), player);
+            SpiritEventHandler.summonNew(new SpiritProfile(SpectralSpirits.FIRE_SPIRIT, Set.of(new FireResistanceAbility(true, true))), player);
         } else {
             SpiritEventHandler.dismissSpirit(player);
         }
