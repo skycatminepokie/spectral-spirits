@@ -28,6 +28,10 @@ public class SummonSpiritGui extends SimpleGui {
         currentSpirit = ((SpectralSpiritHolder) player).spectral_spirits$getSpirit();
         // TODO: Handle generating these builders in SpiritProfile
         addSlot(GuiElementBuilder.from(new ItemStack(Items.OAK_SIGN)).setName(Text.of("Toggle Spirit")).setCallback(this::toggleSpirit));
+        addSlot(GuiElementBuilder.from(new ItemStack(Items.EMERALD)).setName(Text.of("Choose spirit type")).setCallback(() -> {
+            close();
+            new SpiritTypeGui(player).open();
+        }));
         setTitle(Text.of("Spectral Spirits"));
     }
 
