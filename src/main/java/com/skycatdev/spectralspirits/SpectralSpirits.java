@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SpectralSpirits implements ModInitializer {
+    // To register a new Spirit type: Register everything normally, except for the EntityType. That has to be registered with SpectralSpirits#registerSpiritEntityType.
     public static final String MOD_ID = "spectral-spirits";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final Registry<EntityType<? extends SpectralSpiritEntity>> SPIRIT_TYPE_REGISTRY = new SimpleRegistry<>(RegistryKey.ofRegistry(Identifier.of(MOD_ID, "spirit_type")), Lifecycle.stable());
