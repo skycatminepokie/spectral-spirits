@@ -23,7 +23,7 @@
 			"com.skycatdev.spectralspirits.SpectralSpiritsClient"
 		],
 		"fabric-datagen": [
-			"com.skycatdev.spectralspirits.SpectralSpiritsDataGenerator"
+			"com.skycatdev.spectralspirits.datagen.SpectralSpiritsDataGenerator"
 		]
 	},
 	"mixins": [

@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 
 import java.util.Objects;
 import java.util.Set;
@@ -31,5 +32,6 @@ public class SpiritTypeGui extends SimpleGui { // WARN: For testing/alpha purpos
                 close();
             }));
         }
+        setTitle(Text.of("Spirit type selection"));
     }
 }
