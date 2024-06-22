@@ -30,6 +30,7 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
         moveControl = new FlightMoveControl(this, 1, true);
         intersectionChecked = false;
         spiritType = entityType;
+        setInvulnerable(true);
     }
 
     /**
@@ -40,7 +41,6 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
     }
 
     public void updateFromProfile(SpiritProfile profile) {
-        // TODO
         abilities = profile.abilities();
     }
 
