@@ -2,9 +2,9 @@ package com.skycatdev.spectralspirits;
 
 import com.mojang.serialization.Lifecycle;
 import com.skycatdev.spectralspirits.command.CommandHandler;
-import com.skycatdev.spectralspirits.entity.FireSpiritEntity;
-import com.skycatdev.spectralspirits.entity.SpectralSpiritEntity;
-import com.skycatdev.spectralspirits.entity.TestSpectralSpiritEntity;
+import com.skycatdev.spectralspirits.client.entity.FireSpiritEntity;
+import com.skycatdev.spectralspirits.client.entity.SpectralSpiritEntity;
+import com.skycatdev.spectralspirits.client.entity.TestSpectralSpiritEntity;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;

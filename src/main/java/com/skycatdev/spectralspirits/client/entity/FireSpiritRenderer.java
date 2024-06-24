@@ -1,6 +1,6 @@
-package com.skycatdev.spectralspirits.entity;
+package com.skycatdev.spectralspirits.client.entity;
 
-import com.skycatdev.spectralspirits.SpectralSpiritsClient;
+import com.skycatdev.spectralspirits.client.SpectralSpiritsClient;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;

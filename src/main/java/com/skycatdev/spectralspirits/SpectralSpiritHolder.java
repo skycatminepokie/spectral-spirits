@@ -1,6 +1,6 @@
 package com.skycatdev.spectralspirits;
 
-import com.skycatdev.spectralspirits.entity.SpectralSpiritEntity;
+import com.skycatdev.spectralspirits.client.entity.SpectralSpiritEntity;
 
 public interface SpectralSpiritHolder {
     /**

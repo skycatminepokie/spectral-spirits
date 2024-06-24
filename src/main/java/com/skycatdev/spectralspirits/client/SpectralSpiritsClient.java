@@ -1,9 +1,10 @@
-package com.skycatdev.spectralspirits;
+package com.skycatdev.spectralspirits.client;
 
-import com.skycatdev.spectralspirits.entity.FireSpiritModel;
-import com.skycatdev.spectralspirits.entity.FireSpiritRenderer;
-import com.skycatdev.spectralspirits.entity.TestSpectralSpiritModel;
-import com.skycatdev.spectralspirits.entity.TestSpectralSpiritRenderer;
+import com.skycatdev.spectralspirits.SpectralSpirits;
+import com.skycatdev.spectralspirits.client.entity.FireSpiritModel;
+import com.skycatdev.spectralspirits.client.entity.FireSpiritRenderer;
+import com.skycatdev.spectralspirits.client.entity.TestSpectralSpiritModel;
+import com.skycatdev.spectralspirits.client.entity.TestSpectralSpiritRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;

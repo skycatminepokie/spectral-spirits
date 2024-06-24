@@ -1,4 +1,4 @@
-package com.skycatdev.spectralspirits.entity;
+package com.skycatdev.spectralspirits.client.entity;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;

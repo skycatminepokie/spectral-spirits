@@ -3,7 +3,7 @@ package com.skycatdev.spectralspirits;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.skycatdev.spectralspirits.ability.Ability;
-import com.skycatdev.spectralspirits.entity.SpectralSpiritEntity;
+import com.skycatdev.spectralspirits.client.entity.SpectralSpiritEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;

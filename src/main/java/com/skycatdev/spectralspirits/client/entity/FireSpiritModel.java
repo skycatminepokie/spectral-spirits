@@ -1,4 +1,4 @@
-package com.skycatdev.spectralspirits.entity;
+package com.skycatdev.spectralspirits.client.entity;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;

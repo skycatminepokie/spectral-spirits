@@ -1,4 +1,4 @@
-package com.skycatdev.spectralspirits.entity;
+package com.skycatdev.spectralspirits.client.entity;
 
 import com.skycatdev.spectralspirits.SpiritProfile;
 import com.skycatdev.spectralspirits.ability.Ability;

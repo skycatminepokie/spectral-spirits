@@ -5,7 +5,7 @@ import com.skycatdev.spectralspirits.SpectralSpirits;
 import com.skycatdev.spectralspirits.SpiritEventHandler;
 import com.skycatdev.spectralspirits.SpiritProfile;
 import com.skycatdev.spectralspirits.ability.FireResistanceAbility;
-import com.skycatdev.spectralspirits.entity.SpectralSpiritEntity;
+import com.skycatdev.spectralspirits.client.entity.SpectralSpiritEntity;
 import eu.pb4.sgui.api.elements.GuiElementBuilder;
 import eu.pb4.sgui.api.gui.SimpleGui;
 import net.minecraft.item.ItemStack;

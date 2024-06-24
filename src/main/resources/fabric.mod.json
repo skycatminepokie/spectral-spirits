@@ -20,18 +20,14 @@
 			"com.skycatdev.spectralspirits.SpectralSpirits"
 		],
 		"client": [
-			"com.skycatdev.spectralspirits.SpectralSpiritsClient"
+          "com.skycatdev.spectralspirits.client.SpectralSpiritsClient"
 		],
 		"fabric-datagen": [
 			"com.skycatdev.spectralspirits.datagen.SpectralSpiritsDataGenerator"
 		]
 	},
 	"mixins": [
-		"spectral-spirits.mixins.json",
-		{
-			"config": "spectral-spirits.client.mixins.json",
-			"environment": "client"
-		}
+		"spectral-spirits.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.11",

@@ -6,7 +6,7 @@ import com.skycatdev.spectralspirits.SpectralSpiritHolder;
 import com.skycatdev.spectralspirits.SpectralSpirits;
 import com.skycatdev.spectralspirits.SpiritProfile;
 import com.skycatdev.spectralspirits.ability.AbilityTypes;
-import com.skycatdev.spectralspirits.entity.SpectralSpiritEntity;
+import com.skycatdev.spectralspirits.client.entity.SpectralSpiritEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
