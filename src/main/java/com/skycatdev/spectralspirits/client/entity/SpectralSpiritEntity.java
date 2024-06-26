@@ -35,6 +35,11 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
     }
 
     @Override
+    public boolean canBeLeashed() {
+        return false;
+    }
+
+    @Override
     public boolean isInvulnerableTo(DamageSource damageSource) {
         return damageSource.isSourceCreativePlayer() || super.isInvulnerableTo(damageSource);
     }
