@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.ai.control.FlightMoveControl;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
@@ -31,6 +32,16 @@ public abstract class SpectralSpiritEntity extends MobEntity implements Ownable 
         intersectionChecked = false;
         spiritType = entityType;
         setInvulnerable(true);
+    }
+
+    @Override
+    public boolean isInvulnerableTo(DamageSource damageSource) {
+        return damageSource.isSourceCreativePlayer() || super.isInvulnerableTo(damageSource);
+    }
+
+    @Override
+    public boolean isPushable() {
+        return false;
     }
 
     /**
