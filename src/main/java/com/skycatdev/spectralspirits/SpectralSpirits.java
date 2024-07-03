@@ -1,10 +1,10 @@
 package com.skycatdev.spectralspirits;
 
 import com.mojang.serialization.Lifecycle;
-import com.skycatdev.spectralspirits.command.CommandHandler;
 import com.skycatdev.spectralspirits.client.entity.FireSpiritEntity;
 import com.skycatdev.spectralspirits.client.entity.SpectralSpiritEntity;
 import com.skycatdev.spectralspirits.client.entity.TestSpectralSpiritEntity;
+import com.skycatdev.spectralspirits.command.CommandHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
@@ -29,7 +29,7 @@ public class SpectralSpirits implements ModInitializer {
     public static final EntityType<TestSpectralSpiritEntity> TEST_SPECTRAL_SPIRIT = registerSpiritEntityType(Identifier.of(MOD_ID, "test_spectral_spirit"),
             EntityType.Builder.create(TestSpectralSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).disableSaving().disableSummon().build());
     public static final EntityType<FireSpiritEntity> FIRE_SPIRIT = registerSpiritEntityType(Identifier.of(MOD_ID, "fire_spirit"),
-            EntityType.Builder.create(FireSpiritEntity::new, SpawnGroup.MISC).dimensions(0.08f, 0.16f).disableSaving().disableSummon().build());
+            EntityType.Builder.create(FireSpiritEntity::new, SpawnGroup.MISC).dimensions(0.64f, 0.52f).disableSaving().disableSummon().build());
     @SuppressWarnings("UnstableApiUsage") public static final AttachmentType<SpiritProfile> SPECTRAL_SPIRIT_ATTACHMENT = AttachmentRegistry.<SpiritProfile>builder().copyOnDeath().persistent(SpiritProfile.CODEC).buildAndRegister(Identifier.of(MOD_ID, "spirit_profile"));
 
     @Override
