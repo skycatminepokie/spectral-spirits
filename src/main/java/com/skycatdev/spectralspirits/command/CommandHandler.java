@@ -26,14 +26,14 @@ public class CommandHandler {
                 .executes(CommandHandler::openGui)
                 .build();
         var grant = literal("grant")
-                .requires((source) -> source.hasPermissionLevel(3))
+                .requires((source) -> source.hasPermissionLevel(2))
                 .build();
         var grantPlayer = argument("player", EntityArgumentType.player())
-                .requires((source) -> source.hasPermissionLevel(3))
+                .requires((source) -> source.hasPermissionLevel(2))
                 .executes(CommandHandler::grantSpectral)
                 .build();
         var grantPlayerAbility = literal("fireRes") // temporary until we have actual stuff
-                .requires((source) -> source.hasPermissionLevel(3))
+                .requires((source) -> source.hasPermissionLevel(2))
                 .executes(CommandHandler::giveFireResAbility)
                 .build();
         //@formatter:off
